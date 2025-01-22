@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Loader;
+
+// FQCN Full Qualified Class Name = App\ProductLoader
+use App\Model\Product;
+
 class ProductLoader
 {
     /*

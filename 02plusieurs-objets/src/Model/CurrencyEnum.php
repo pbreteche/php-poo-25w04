@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model;
+
 class CurrencyEnum
 {
     public const EUR = "EUR";
@@ -11,7 +13,7 @@ class CurrencyEnum
     public function __construct(?string $value)
     {
         if (!in_array($value, [self::EUR, self::USD, self::GBP])) {
-            throw new InvalidArgumentException("value should be one of 'EUR', 'USD', 'GBP'");
+            throw new \InvalidArgumentException("value should be one of 'EUR', 'USD', 'GBP'");
         }
 
         $this->value = $value;
