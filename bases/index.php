@@ -1,13 +1,15 @@
 #!/usr/bin/php
 <?php
 
-require './Contact.php';
+require __DIR__.'/PostalAddressImmutable.php';
+require __DIR__.'/Contact.php';
 
 $contact  = new Contact();
 $contact->setEmail('john.doe@example.com');
+$contact->setAddress(new PostalAddressImmutable(null, '44000'));
 echo $contact->getEmail() . "\n";
 try {
-    $contact->email = 'bad email';
+    // $contact->email = 'bad email';
     $contact->setEmail('bad email');
 } catch (InvalidArgumentException $e) {
     echo $e->getMessage() . "\n";
@@ -16,3 +18,4 @@ try {
 }
 
 echo $contact->getEmail() . "\n";
+echo $contact->getAddress() . "\n";

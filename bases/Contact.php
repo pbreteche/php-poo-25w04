@@ -16,6 +16,11 @@ class Contact
     private ?string $name = null;
     private ?string $email = null;
     private ?string $phone = null;
+    /*
+     * Propriété de type Objet
+     * On parle ici d'agrégation
+     */
+    private ?PostalAddressImmutable $address = null;
 
     public function getEmail(): ?string
     {
@@ -60,4 +65,27 @@ class Contact
     {
         $this->phone = $phone;
     }
+
+    /*
+     * L'encapsulation fonctionne toujours ici, car l'objet de type Address
+     * ne peut être modifié en dehors de son constructeur
+     */
+    public function getAddress(): ?PostalAddressImmutable
+    {
+        return $this->address;
+    }
+
+    /*
+     * Address implémente __toString et peut donc être retourné en tant que chaîne.
+     */
+    public function getAddressAsString(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?PostalAddressImmutable $address): void
+    {
+        $this->address = $address;
+    }
+
 }
