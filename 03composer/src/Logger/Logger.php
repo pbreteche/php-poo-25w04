@@ -5,8 +5,9 @@ namespace App03\Logger;
 use App03\Env;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as Monolog;
+use Psr\Log\LoggerInterface;
 
-class Logger
+class Logger implements LoggerInterface
 {
     private Monolog $logger;
 
