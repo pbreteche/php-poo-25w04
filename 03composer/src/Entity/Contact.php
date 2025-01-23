@@ -6,11 +6,11 @@ use PostalAddressImmutable;
 
 class Contact
 {
-    private ?string $name = null;
-    private ?string $email = null;
-    private ?string $phone = null;
+    protected ?string $name = null;
+    protected ?string $email = null;
+    protected ?string $phone = null;
 
-    private ?PostalAddressImmutable $address = null;
+    protected ?PostalAddressImmutable $address = null;
 
     public function getEmail(): ?string
     {
