@@ -2,20 +2,19 @@
 
 namespace App03\Logger;
 
+use App03\Env;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as Monolog;
 
 class Logger
 {
-    private const LOG_PATH = __DIR__.'/../../logs/error.log';
     private Monolog $logger;
 
-    public function __construct()
+    public function __construct(Env $env)
     {
         $this->logger = new Monolog('logger');
-        $this->logger->pushHandler(new StreamHandler(self::LOG_PATH, Monolog::WARNING));
+        $this->logger->pushHandler(new StreamHandler($env->get('LOG_PATH'), Monolog::WARNING));
     }
-
 
     public function emergency($message, array $context = array())
     {
