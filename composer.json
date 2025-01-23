@@ -1,2 +1,17 @@
 {
+    "name": "pierre/formation-poo",
+    "type": "project",
+    "require": {
+        "php": "7.4.*",
+        "monolog/monolog": "^2.10"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App03\\": "03composer/src/"
+        }
+    }
 }
