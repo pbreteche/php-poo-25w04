@@ -4,7 +4,10 @@ namespace App06;
 
 use App06\Config\Config;
 use App06\Database\ConnectionFactory;
+use App06\Database\Contact;
+use App06\Serializer\ContactNormalizer;
 use App06\Serializer\CsvFormatter;
+use App06\Validator\ContactValidator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class App
@@ -12,12 +15,16 @@ class App
     private array $args;
     private Capsule $capsule;
     private CsvFormatter $formatter;
+    private ContactNormalizer $normalizer;
+    private ContactValidator $validator;
 
     public function __construct()
     {
         $this->args = $_SERVER['argv'];
         $this->capsule = ConnectionFactory::createConnection(Config::getConfig()->get('database'));
         $this->formatter = new CsvFormatter();
+        $this->normalizer = new ContactNormalizer();
+        $this->validator = new ContactValidator();
     }
 
     public function initialize(): self
@@ -35,10 +42,22 @@ class App
 
     public function run(): int
     {
+        $rawData = $this->formatter->unFormat(file_get_contents($this->args[1]));
+        $contacts = array_map(fn ($c) => $this->normalizer->denormalize($c), $rawData);
+        $violations = [];
+        foreach ($contacts as $contact) {
+            $violations = array_merge($violations, $this->validator->validate($contact));
+        }
+        if (0 === count($violations)) {
+            $this->capsule->getConnection()->table('contact')->insert(array_map(fn ($c) => $c->toArray(), $contacts));
 
-        $data = $this->formatter->unFormat(file_get_contents($this->args[1]));
-        $this->capsule->getConnection()->table('contact')->insert($data);
+            return 0;
+        }
 
-        return 0;
+        foreach ($violations as $violation) {
+            echo $violation->message.PHP_EOL;
+        }
+
+        return 1;
     }
 }
