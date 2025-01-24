@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use App06\App;
+
+require_once __DIR__.'/../vendor/autoload.php';
+const APP_PROJECT_ROOT = __DIR__;
+
+try {
+    $exit_code = (new App())
+            ->initialize()
+            ->run()
+    ;
+} catch (\Throwable $exception) {
+    echo $exception->getMessage().PHP_EOL;
+    exit(1);
+}
+
+exit($exit_code);

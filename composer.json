@@ -3,7 +3,9 @@
     "type": "project",
     "require": {
         "php": "7.4.*",
-        "monolog/monolog": "^2.10"
+        "monolog/monolog": "^2.10",
+        "illuminate/database": "^8.83",
+        "symfony/console": "^5.4"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4"
@@ -11,7 +13,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "App03\\": "03composer/src/"
+            "App03\\": "03composer/src/",
+            "App06\\": "06atelier/src/"
         }
     }
 }
