@@ -8,7 +8,8 @@
         "symfony/console": "^5.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^5.4"
+        "symfony/var-dumper": "^5.4",
+        "friendsofphp/php-cs-fixer": "^3.68"
     },
     "license": "MIT",
     "autoload": {
