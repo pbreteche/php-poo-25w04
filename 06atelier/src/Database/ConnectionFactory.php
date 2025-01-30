@@ -13,7 +13,7 @@ class ConnectionFactory
         $capsule->addConnection([
             'driver' => $dsn['scheme'],
             'host' => $dsn['host'],
-            'database' => ltrim($dsn['path'], '/'),
+            'database' => ltrim((string) $dsn['path'], '/'),
             'username' => $dsn['user'],
             'password' => $dsn['pass'],
             'charset' => 'utf8',

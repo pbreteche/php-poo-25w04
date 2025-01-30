@@ -4,17 +4,12 @@ namespace App06\Validator;
 
 class Violation
 {
-    public string $path;
-    public string $message;
-
     /**
      * @param string $message
      * @param string $path
      */
-    public function __construct(string $message, string $path)
+    public function __construct(public string $message, public string $path)
     {
-        $this->message = $message;
-        $this->path = $path;
     }
 
 

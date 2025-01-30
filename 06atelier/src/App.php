@@ -13,10 +13,10 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 class App
 {
     private array $args;
-    private Capsule $capsule;
-    private CsvFormatter $formatter;
-    private ContactNormalizer $normalizer;
-    private ContactValidator $validator;
+    private readonly Capsule $capsule;
+    private readonly CsvFormatter $formatter;
+    private readonly ContactNormalizer $normalizer;
+    private readonly ContactValidator $validator;
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class App
             throw new \InvalidArgumentException('Indiquer le chemin du fichier CSV à importer');
         }
         $userPath = $this->args[1];
-        if (!file_exists($userPath) || !is_file($userPath) || pathinfo($userPath, PATHINFO_EXTENSION) !== 'csv') {
+        if (!file_exists($userPath) || !is_file($userPath) || pathinfo((string) $userPath, PATHINFO_EXTENSION) !== 'csv') {
             throw new \InvalidArgumentException(sprintf('%s doit être un fichier CSV', $userPath));
         }
 

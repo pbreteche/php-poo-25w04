@@ -15,7 +15,7 @@ class Config
         if (!isset($config['DATABASE_URL'])) {
             throw new \Exception('DATABASE_URL is not set');
         }
-        $this->config['database'] = parse_url($config['DATABASE_URL']);
+        $this->config['database'] = parse_url((string) $config['DATABASE_URL']);
     }
 
     /**
