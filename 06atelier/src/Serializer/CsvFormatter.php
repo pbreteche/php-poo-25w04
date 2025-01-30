@@ -7,6 +7,9 @@ class CsvFormatter implements FormatterInterface
     public function format(array $data): string
     {
         $str = fopen('php://temp', 'r+');
+        if ($str === false) {
+            throw new \RuntimeException('Unable to open temp file');
+        }
         foreach ($data as $row) {
             fputcsv($str, $row);
         }
