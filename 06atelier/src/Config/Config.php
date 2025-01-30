@@ -7,6 +7,9 @@ class Config
     private array $config;
     private static ?self $instance  = null;
 
+    /**
+     * @throws \Exception
+     */
     private function __construct(array $config)
     {
         if (!isset($config['DATABASE_URL'])) {
@@ -15,6 +18,9 @@ class Config
         $this->config['database'] = parse_url($config['DATABASE_URL']);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function getConfig(): ?self
     {
         if (!self::$instance instanceof self) {
