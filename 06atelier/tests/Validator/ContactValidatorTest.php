@@ -6,9 +6,12 @@ use App06\Database\Contact;
 use App06\Validator\ContactValidator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \App06\Database\Contact
+ */
 class ContactValidatorTest extends TestCase
 {
-    public function testValidate()
+    public function testValidateSuccess()
     {
         $validator = new ContactValidator();
         $contact = new Contact();
@@ -19,13 +22,33 @@ class ContactValidatorTest extends TestCase
         $violations = $validator->validate($contact);
 
         $this->assertEquals(0, count($violations), 'On ne devrait pas avoir de violation de contrainte de validation.');
+    }
 
-        $contact->firstName = null;
+    /**
+     * @dataProvider failureContactDataProvider
+     */
+    public function testValidateFailure(Contact $contact, string $path)
+    {
+        $validator = new ContactValidator();
 
         $violations = $validator->validate($contact);
         $this->assertEquals(1, count($violations));
-        $this->assertEquals('firstName', $violations[0]->path);
+        $this->assertEquals($path, $violations[0]->path);
+    }
 
-        $this->markTestIncomplete('This test should validate first name, last name and phone.');
+    public function failureContactDataProvider(): array
+    {
+        $c1 = new Contact();
+        $c1->email = 'test@test.com';
+        $c1->lastName = 'Test';
+
+        $c2 = new Contact();
+        $c2->email = 'test@test.com';
+        $c2->firstName = 'Test';
+
+        return [
+            [$c1, 'firstName'],
+            [$c2, 'lastName'],
+        ];
     }
 }

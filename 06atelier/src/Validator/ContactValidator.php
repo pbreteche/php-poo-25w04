@@ -16,7 +16,7 @@ class ContactValidator
             $violations[] = new Violation('Veuillez renseigner le prénom', 'firstName');
         }
         if (empty($contact->lastName)) {
-            $violations[] = new Violation('Veuillez renseigner le prénom', 'firstName');
+            $violations[] = new Violation('Veuillez renseigner le prénom', 'lastName');
         }
         if ($contact->phone && !preg_match('/^\+\d{11}/', $contact->phone)) {
             $violations[] = new Violation('Le numéro de téléphone est invalid', 'phone');

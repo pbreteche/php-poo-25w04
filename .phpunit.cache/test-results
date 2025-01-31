@@ -1,1 +1,0 @@
-{"version":1,"defects":{"tests\\ContactValidatorTest::testValidate":3,"tests\\Validator\\ContactValidatorTest::testValidate":2},"times":{"tests\\ContactValidatorTest::testValidate":0.002,"tests\\Validator\\ContactValidatorTest::testValidate":0.002}}

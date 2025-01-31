@@ -2,3 +2,4 @@
 .idea
 !.idea/inspectionProfiles
 .php-cs-fixer.cache
+.phpunit.cache
